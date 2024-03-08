@@ -1,12 +1,38 @@
 <template>
-    <div>
+    <div class="coffee-beans-list">
         <div v-if="showMessage" class="message">{{ message }}</div>
         <h2>咖啡豆列表</h2>
         <ul>
-            <li v-for="coffeeBean in coffeeBeans" :key="coffeeBean.id">
-                名稱： {{ coffeeBean.name }}, 烘焙日期： {{ coffeeBean.roast_date }}, 烘焙程度： {{ coffeeBean.roast_level }}, {{ formLabels.weight }} {{ coffeeBean.weight }}, 產地： {{ coffeeBean.origin }}, 備註： {{coffeeBean.notes}}
-                <button @click="editCoffeeBean(coffeeBean)">修改</button>
-                <button @click="deleteCoffeeBean(coffeeBean.id)">刪除</button>
+            <li class="coffee-bean-item" v-for="coffeeBean in coffeeBeans" :key="coffeeBean.id">
+                <div class="coffee-bean-property">
+                    <span class="property-label">{{ formLabels.name }}</span>
+                    <span class="property-value">{{ coffeeBean.name }}</span>
+                </div>
+                <div>
+                    <span>{{ formLabels.roastDate }}</span>
+                    <span>{{ coffeeBean.roast_date }}</span>
+                </div>
+                <div>
+                    <span>{{ formLabels.roastLevel }}</span>
+                    <span>{{ coffeeBean.roast_level }}</span>
+                </div>
+                <div>
+                    <span>{{ formLabels.weight }}</span>
+                    <span>{{ coffeeBean.weight }} 公克</span>
+                </div>
+                <div>
+                    <span>{{ formLabels.origin }}</span>
+                    <span>{{ coffeeBean.origin }}</span>
+                </div>
+                <div>
+                    <span>{{ formLabels.notes }}</span>
+                    <span>{{ coffeeBean.notes }}</span>
+                </div>
+                <div class="coffee-bean-actions">
+                    <button @click="editCoffeeBean(coffeeBean)">{{ formLabels.editButton }}</button>
+                    <button @click="deleteCoffeeBean(coffeeBean.id)">{{ formLabels.deleteButton }}</button>
+                    <button @click="sellCoffeeBean(coffeeBean)">{{ formLabels.sellButton }}</button>
+                </div>
             </li>
         </ul>
         <EditCoffeeBeanDialog 
@@ -25,7 +51,7 @@
     import { useMessageState } from './useMessageState';
     import { useCoffeeBeansState } from './useCoffeeBeansState';
     import EditCoffeeBeanDialog from './EditCoffeeBeanDialog.vue';
-    import { formLabels } from '@/assets/formLabel';
+    import zh from '@/i18n/locales/zh';
     // import { useFetchCoffeeBeans } from './useFetchCoffeeBeans';
     // import  state  from './state';
 
@@ -41,6 +67,7 @@
             const { messageState, setMessage } = useMessageState();
             const isEditDialogVisible = ref(false);
             const editableCoffeeBean = ref({});
+            const formLabels = zh.formLabels
 
             onMounted(() => {
                 useCoffeeBeansState().fetchCoffeeBeans();
@@ -79,6 +106,37 @@
                 }
             };
 
+            const sellCoffeeBean = async (coffeeBean) => {
+                // 使用 prompt 對話框讓用戶輸入賣出的重量
+                const sellWeightStr = prompt('請輸入賣出的重量(公克)：', '454');
+
+                if (sellWeightStr === null || sellWeightStr.trim() === '') {
+                    return;
+                }
+
+                const sellWeight = parseInt(sellWeightStr, 10);
+
+                // 檢查用戶輸入是否有效
+                if (isNaN(sellWeight) || sellWeight <=0) {
+                    alert('請輸入有效的重量！');
+                    return;
+                }
+
+                try{
+                    // 確保不會賣出超過當前重量的咖啡豆
+                    const newWeight = Math.max(coffeeBean.weight - sellWeight, 0);
+
+                    await axios.put(`/api/coffeebeans/${coffeeBean.id}/`, {
+                        ...coffeeBean,
+                        weight: newWeight
+                    });
+                    coffeeBean.weight = newWeight;
+                } catch (error) {
+                    console.error('賣出咖啡豆失敗', error);
+
+                }
+            };
+
 
             return { 
                 coffeeBeans, 
@@ -90,7 +148,50 @@
                 editableCoffeeBean,
                 handleSave,
                 formLabels,
+                sellCoffeeBean,
             };
         }
     }
 </script>
+
+<style lang="scss">
+    .coffee-beans-list {
+        flex: 1;
+        display: flex;
+        /* flex-wrap: wrap; */
+        flex-direction: column;
+        margin: 20px;
+        padding: 10px;
+        // overflow:hidden;
+        // overflow-y: scroll;
+        background: rgba(255, 255, 255, 0.1);
+        // backdrop-filter: blur(5px);
+        border-radius: 15px;
+        box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1), inset 10px 10px 15px rgba(255, 255, 255, 0.05);
+    }
+    .coffee-beans-list ul{
+        /* margin: 0; */
+        padding: 0;
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        // overflow: hidden;
+        // overflow-y: scroll;
+
+        li {
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.1);
+            min-width: 20rem;
+
+            &:hover {
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            }
+        }
+    }
+</style>

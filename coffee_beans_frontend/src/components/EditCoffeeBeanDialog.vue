@@ -1,46 +1,48 @@
 <template>
-    <div class="dialog-backdrop" v-if="isVisible">
-        <div class="dialog">
-            <h2>編輯咖啡豆</h2>
-            <form @submit.prevent="save">
-                <div class="form-group">
-                    <label for="name">{{ formLabels.name }}</label>
-                    <input id="name" v-model="editableBean.name" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="roast_date">{{ formLabels.roastDate }}</label>
-                    <input id="roast_date" v-model="editableBean.roast_date" type="date">
-                </div>
-                <div class="form-group">
-                    <label for="roast_level">{{ formLabels.roastLevel }}</label>
-                    <select id="roast_level" v-model="editableBean.roast_level">
-                        <option value="淺烘焙">淺烘焙</option>
-                        <option value="中烘焙">中烘焙</option>
-                        <option value="深烘焙">深烘焙</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="weight">{{ formLabels.weight }}</label>
-                    <input id="weight" v-model="editableBean.weight" type="number" required>
-                </div>
-                <div class="form-group">
-                    <label for="origin">{{ formLabels.origin }}</label>
-                    <input id="origin" v-model="editableBean.origin" type="text">
-                </div>
-                <div>
-                    <label for="notes">{{ formLabels.notes }}</label>
-                    <textarea id="notes" v-model="editableBean.notes"></textarea>
-                </div>
-                <button type="submit">{{ formLabels.submitButton }}</button>
-                <button type="button" @click="close">{{ formLabels.cancelButton }}</button>
-            </form>
+    <Teleport to="body">
+        <div class="dialog-backdrop" v-if="isVisible">
+            <div class="dialog">
+                <h2>編輯咖啡豆</h2>
+                <form @submit.prevent="save">
+                    <div class="form-group">
+                        <label for="name">{{ formLabels.name }}</label>
+                        <input id="name" v-model="editableBean.name" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="roast_date">{{ formLabels.roastDate }}</label>
+                        <input id="roast_date" v-model="editableBean.roast_date" type="date">
+                    </div>
+                    <div class="form-group">
+                        <label for="roast_level">{{ formLabels.roastLevel }}</label>
+                        <select id="roast_level" v-model="editableBean.roast_level">
+                            <option value="淺烘焙">淺烘焙</option>
+                            <option value="中烘焙">中烘焙</option>
+                            <option value="深烘焙">深烘焙</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="weight">{{ formLabels.weight }}</label>
+                        <input id="weight" v-model="editableBean.weight" type="number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="origin">{{ formLabels.origin }}</label>
+                        <input id="origin" v-model="editableBean.origin" type="text">
+                    </div>
+                    <div>
+                        <label for="notes">{{ formLabels.notes }}</label>
+                        <textarea id="notes" v-model="editableBean.notes"></textarea>
+                    </div>
+                    <button type="submit">{{ formLabels.submitButton }}</button>
+                    <button type="button" @click="close">{{ formLabels.cancelButton }}</button>
+                </form>
+            </div>
         </div>
-    </div>
+    </Teleport>
 </template>
 
 <script>
     import { ref, watch } from 'vue';
-    import { formLabels } from '@/assets/formLabel';
+    import zh from '@/i18n/locales/zh';
 
     export default {
         props: {
@@ -51,6 +53,7 @@
         emits: ['update:isVisible', 'save'],
         setup(props, { emit }) {
             const editableBean = ref({ ...props.coffeeBean });
+            const formLabels = zh.formLabels
 
             watch(
                 // 第一個參數是我們想要監視的對象
@@ -91,6 +94,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 .dialog {

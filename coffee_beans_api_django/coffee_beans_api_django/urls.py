@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from inventory.views import CoffeeBeanViewSet
+# from django.contrib.auth import views as auth_views
+
 
 # 通過register方法將CoffeeBeanViewSet與一個路由前綴'coffeebeans'關聯起來。
 # 這意味著所有關於CoffeeBean的API端點都將以/coffeebeans/作為URL前綴。
@@ -27,4 +29,5 @@ router.register(r'coffeebeans', CoffeeBeanViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api/user_management/', include('user_management.urls')),
 ]

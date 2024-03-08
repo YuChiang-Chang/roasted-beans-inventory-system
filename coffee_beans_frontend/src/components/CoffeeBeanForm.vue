@@ -13,7 +13,7 @@
             <div>
                 <label for="roast_level">{{ formLabels.roastLevel }}</label>
                 <select id="roast_level" v-model="coffeeBean.roast_level" required>
-                    <option v-for="option in roastLevelOptions" :key="option.value" :value="option.value">{{ option.text }}</option>
+                    <option v-for="option in roastLevelOptions" :key="option.value" :value="option.text">{{ option.text }}</option>
                     <!-- <option value="中烘焙">中烘焙</option> -->
                 </select>
             </div>
@@ -40,7 +40,7 @@
 <script>
     import { reactive, toRefs, ref, computed } from 'vue';
     import axios from 'axios';
-    import { formLabels } from '@/assets/formLabel';
+    import zh from '@/i18n/locales/zh';
     import { useCoffeeBeansState } from './useCoffeeBeansState';
     // import state from './state';
     // import { useFetchCoffeeBeans } from './useFetchCoffeeBeans';
@@ -58,6 +58,8 @@
 
             const successMessage = ref('');
             const errors = ref({});
+
+            const formLabels = zh.formLabels
 
             const roastLevelOptions = computed(() => Object.entries(formLabels.roastLevelOptions).map(([value, text]) => ({ value, text})));
             
@@ -152,6 +154,20 @@
 </script>
 
 <style>
+    .coffee-bean-form {
+        flex: 1;
+        padding: 20px;
+        margin: 20px;
+        /* display: flex; */
+        /* margin-bottom: 100px; */
+        /* box-sizing: border-box; */
+        background: rgba(255, 255, 255, 0.1);
+        /* backdrop-filter: blur(5px); */
+        border-radius: 15px;
+        box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1), inset 10px 10px 15px rgba(255, 255, 255, 0.05);
+        /* border: 1px solid rgba(255, 255, 255, 0.3); */
+
+    }
     .success-message {
         color: green;
     }
