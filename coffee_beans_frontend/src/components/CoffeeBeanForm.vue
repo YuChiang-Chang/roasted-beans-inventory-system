@@ -61,7 +61,7 @@
 
             const formLabels = zh.formLabels
 
-            const roastLevelOptions = computed(() => Object.entries(formLabels.roastLevelOptions).map(([value, text]) => ({ value, text})));
+            const roastLevelOptions = computed(() => Object.entries(formLabels.roastLevelOptions).map(([value, text]) => ({ value, text })));
             
             // const { fetchCoffeeBeans } = useFetchCoffeeBeans();
 
