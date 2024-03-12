@@ -1,0 +1,1 @@
+from coffee_beans_api_django.wsgi import application

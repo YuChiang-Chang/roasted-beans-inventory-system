@@ -1,0 +1,51 @@
+[  
+    {
+      "model": "coffee_beans_api_django.custompermission",
+      "pk": 1,
+      "fields": {
+        "codename": "view_user",
+        "name": "Can view user",
+        "content_type": 1,
+        "description": ""
+      }
+    },
+    {
+        "model": "coffee_beans_api_django.custompermission",
+        "pk": 2,
+        "fields": {
+            "codename": "add_user",
+            "name": "Can add user",
+            "content_type": 1,
+            "description": ""
+        }
+    },
+    {
+        "model": "coffee_beans_api_django.custompermission",
+        "pk": 3,
+        "fields": {
+            "codename": "edit_user",
+            "name": "Can edit user",
+            "content_type": 1,
+            "description": ""
+        }
+    },
+    {
+        "model": "coffee_beans_api_django.custompermission",
+        "pk": 4,
+        "fields": {
+            "codename": "delete_user",
+            "name": "Can delete user",
+            "content_type": 1,
+            "description": ""
+        }
+    },
+    {
+      "model": "coffee_beans_api_django.role",
+      "pk": 1,
+      "fields": {
+        "name": "Administrator",
+        "permissions": [1, 2]
+      }
+    }
+]
+  

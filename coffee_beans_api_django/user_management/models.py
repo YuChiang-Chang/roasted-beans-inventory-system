@@ -53,7 +53,14 @@ class CustomUserManager(BaseUserManager):
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser 必須設定 is_superuser=True.')
 
-        return self.create_user(email, password, **extra_fields)       
+        # 創建超級用戶
+        user = self.create_user(email, password, **extra_fields)       
+
+        # 分配所有自定義權限給超級用戶
+        all_permissions = CustomPermission.objects.all()
+        user.permissions.set(all_permissions)
+
+        return user
     
 
 class CustomUser(AbstractBaseUser):

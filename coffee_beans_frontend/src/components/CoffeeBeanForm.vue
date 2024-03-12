@@ -71,7 +71,7 @@
                 }
 
                 try {
-                    await axios.post('http://localhost:8000/api/coffeebeans/', coffeeBean);
+                    await axios.post('/api/coffeebeans/', coffeeBean);
                     successMessage.value = '咖啡豆資料新增成功';
                     resetForm();   
                     await useCoffeeBeansState().fetchCoffeeBeans(); // 從useCoffeeBeans中調用更新列表的方法

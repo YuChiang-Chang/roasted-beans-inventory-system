@@ -17,7 +17,7 @@
             <div>
                 <label>選擇角色</label>
                 <select v-model="editableUser.selectedRole">
-                    <option v-for="role in roles" :key="role.id" :value="role.id">{{ role.name }}</option>
+                    <option v-for="role in roles" :key="role.id" :value="role.id" :disabled="isSuperuser">{{ role.name }}</option>
                 </select>
             </div>
             <div>
@@ -25,6 +25,7 @@
                 <div v-for="permission in permissions" :key="permission.id">
                     <input type="checkbox" 
                         :value="permission.id" 
+                        :disabled="isSuperuser"
                         v-model="editableUser.selectedPermissions">
                     {{ permission.name }}
                 </div>
@@ -35,7 +36,7 @@
 </template>
 
 <script>
-    import { ref, watch, onMounted } from 'vue';
+    import { ref, watch, onMounted, computed } from 'vue';
     import { useStore } from 'vuex';
     import axios from 'axios';
 
@@ -117,12 +118,17 @@
                 
             }
 
+            const isSuperuser = computed(() => {
+                return props.user.is_superuser;
+            })
+
             return {
                 editableUser,
                 // selectedPermissions,
                 permissions,
                 roles,
                 submitUpdate,
+                isSuperuser,
                 // errorMessage,
             }
         }

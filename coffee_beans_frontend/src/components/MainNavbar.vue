@@ -1,8 +1,9 @@
 <template>
     <nav v-if="isLoggedIn" class="nav">
-        <span v-if="email">{{ email }}</span>
+        <!-- <span v-if="email">{{ email }}</span> -->
         <router-link to="/">首頁</router-link>
         <router-link to="/admin/users">用戶管理</router-link>
+        <router-link to="/profile">個人資料</router-link>
         <button @click="logout">登出</button>
     </nav>
 </template>
@@ -17,7 +18,7 @@
             const store = useStore();
             const router = useRouter();
 
-            const email = computed(() => store.state.email);
+            // const email = computed(() => store.state.email);
             const isLoggedIn = computed(() => store.state.isLoggedIn);
 
             function logout() {
@@ -27,7 +28,7 @@
             }
 
             return { 
-                email,
+                // email,
                 isLoggedIn, 
                 logout 
             };

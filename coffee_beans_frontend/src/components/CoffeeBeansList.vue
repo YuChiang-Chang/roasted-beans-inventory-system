@@ -82,7 +82,7 @@
 
             const deleteCoffeeBean = async (id) => {
                 try {
-                    await axios.delete(`http://localhost:8000/api/coffeebeans/${id}`)
+                    await axios.delete(`/api/coffeebeans/${id}`)
                     setMessage('咖啡豆資料已刪除')
                     // alert('');
                     await fetchCoffeeBeans();
@@ -95,7 +95,7 @@
 
             const handleSave = async (editedCoffeeBean) => {
                 try {
-                    await axios.put(`http://localhost:8000/api/coffeebeans/${editedCoffeeBean.id}/`, editedCoffeeBean);
+                    await axios.put(`/api/coffeebeans/${editedCoffeeBean.id}/`, editedCoffeeBean);
                     await fetchCoffeeBeans();
                     setMessage('咖啡豆資料更新成功');
                     isEditDialogVisible.value = false;

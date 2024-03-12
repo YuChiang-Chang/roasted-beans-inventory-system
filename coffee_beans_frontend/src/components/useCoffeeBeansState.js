@@ -11,7 +11,7 @@ async function fetchCoffeeBeans() {
     state.isLoading = true;
     state.error = null;
     try {
-        const response = await axios.get('http://localhost:8000/api/coffeebeans/');
+        const response = await axios.get('/api/coffeebeans/');
         state.coffeeBeans = response.data;
     } catch (error) {
         console.error("Fetching coffee beans failed:", error);

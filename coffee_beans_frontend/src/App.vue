@@ -63,7 +63,7 @@ body {
   
   input, select, textarea {
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
+    // backdrop-filter: blur(5px);
     border: none;
     outline: none;
     border-radius: 0.3rem;
