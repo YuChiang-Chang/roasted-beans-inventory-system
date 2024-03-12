@@ -49,7 +49,7 @@ python manage.py runserver
 ```
 
 ## 使用指南
-- 訪問前端（默認：http://localhost:8080），進行咖啡豆庫存的管理操作。
+- 訪問前端（默認：http://localhost:8080 ），進行咖啡豆庫存的管理操作。
 - 使用超級用戶登入系統可進行用戶和權限的管理。
 - 非超級用戶將根據其角色和權限進行相應的操作限制。
 
@@ -57,3 +57,5 @@ python manage.py runserver
 ```bash
 python manage.py createsuperuser
 ```
+
+![示例圖片](螢幕擷取畫面_12-3-2024_203531_staging.beansinventory.jadeite.com.tw.jpeg)
