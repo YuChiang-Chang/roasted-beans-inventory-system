@@ -32,6 +32,8 @@ npm run serve
 
 進入後端項目目錄：
 
+- 請先修改.env檔內的資料  
+
 ```bash
 cd coffee_beans_api_django/
 ```
@@ -49,7 +51,7 @@ python manage.py runserver
 ```
 
 ## 使用指南
-- 訪問前端（默認：http://localhost:8080 ），進行咖啡豆庫存的管理操作。
+- 訪問前端（默認：<http://localhost:8080>），進行咖啡豆庫存的管理操作。
 - 使用超級用戶登入系統可進行用戶和權限的管理。
 - 非超級用戶將根據其角色和權限進行相應的操作限制。
 
