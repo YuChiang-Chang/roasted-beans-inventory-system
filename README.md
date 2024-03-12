@@ -1,6 +1,6 @@
 # 咖啡豆庫存管理系統
 
-這是一個使用 Vue 3 和 Django REST Framework 構建的咖啡豆庫存管理系統，支持咖啡豆的增刪改查操作，並實現了用戶管理功能。
+這是一個使用 Vue 3 和 Django REST Framework 構建的咖啡豆庫存管理系統，支持咖啡豆的增刪改操作，並實現了用戶管理功能。
 
 ## 功能特性
 
@@ -49,7 +49,7 @@ python manage.py runserver
 ```
 
 ## 使用指南
-- 訪問前端（默認：http://localhost:8080），進行咖啡豆庫存的管理操作。
+- 訪問前端（默認：http://localhost:8080 ），進行咖啡豆庫存的管理操作。
 - 使用超級用戶登入系統可進行用戶和權限的管理。
 - 非超級用戶將根據其角色和權限進行相應的操作限制。
 
@@ -57,3 +57,5 @@ python manage.py runserver
 ```bash
 python manage.py createsuperuser
 ```
+
+![示例圖片](螢幕擷取畫面_12-3-2024_203531_staging.beansinventory.jadeite.com.tw.jpeg)
