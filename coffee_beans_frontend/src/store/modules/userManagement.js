@@ -51,11 +51,7 @@ export const userManagement ={
                         .map(([key, value]) => `${key}: ${value}`)
                         .join(', ');
                 }
-                // if (error.response && error.response.data) {
-                //     alert(`新增用戶失敗： ${error.response.data.detail}`);
-                // } else {
-                    alert('新增用戶失敗，請稍後再試。')
-                // }
+                alert('新增用戶失敗，請稍後再試。')
             }
         },
         async updateUser({ dispatch }, { userId, userData}) {
