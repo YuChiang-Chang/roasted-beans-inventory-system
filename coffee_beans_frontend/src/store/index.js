@@ -11,17 +11,6 @@ const store = createStore({
     modules: {
         userManagement,
     },
-    // state() {
-    //     return {
-    //         // 這裡放置全局狀態
-    //         user: null,
-    //         email: null,
-    //         isLoggedIn: false,
-    //         userToken: null,
-    //         isAdmin: false,
-    //         userPermissions: [],
-    //     };
-    // },
     state: {
         user: {
             email: null,
@@ -56,13 +45,6 @@ const store = createStore({
                 // 後端登入 API 端點
                 const response = await axios.post('/api/user_management/login/', { email, password });
                 console.log("登入響應：", response.data)
-
-                // 從響應中獲取 token 和用戶資訊（假設後端返回的資料結構中包含這些資訊）
-                // const { token, isAdmin, permissions } = response.data;
-                // console.log("回傳權限：", permissions)
-    
-                // 將 token 保存到 localStorage 中，以便之後的請求可以使用
-                // localStorage.setItem('user-token', response.data.token);
     
                 // 調用 mutation 更新 Vuex store 的狀態
                 // 傳遞 isLoggedIn 為 true 表示用戶已登入，並傳遞獲得的用戶資訊
@@ -76,11 +58,9 @@ const store = createStore({
                     email: response.data.email,
                 });
                 commit('setUserPermissions', response.data.permissions);
-                // console('permissions結果', response.data.permissions)
                 console.log(store.state.userToken)
             } catch (error) {
                 console.error('登入失敗', error);
-                // console.log(process.env.VUE_APP_API_BASE_URL)
             }
 
         },
@@ -103,23 +83,12 @@ const store = createStore({
                 } else {
                     console.log("用戶資訊未成功", response.data);
                 }
-                
-                // commit('setLoginState', {
-                //     email: response.data.email,
-                //     isLoggedIn: state.isLoggedIn,
-                //     userToken: state.userToken,
-                //     isAdmin: state.isAdmin,
-                // })
-
             } catch (error) {
                 console.error('更新用戶資訊失敗', error);
             }
         }
     },
     getters: {
-        // currentUser(state) {
-        //     return state.user;
-        // },
         isUserAdmin(state) {
             return state.isAdmin;
         },

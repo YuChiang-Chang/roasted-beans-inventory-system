@@ -52,8 +52,6 @@
     import { useCoffeeBeansState } from './useCoffeeBeansState';
     import EditCoffeeBeanDialog from './EditCoffeeBeanDialog.vue';
     import zh from '@/i18n/locales/zh';
-    // import { useFetchCoffeeBeans } from './useFetchCoffeeBeans';
-    // import  state  from './state';
 
     export default {
         components: {
@@ -61,7 +59,6 @@
         },
 
         setup() {
-            // const { error, fetchCoffeeBeans, isLoading } = useFetchCoffeeBeans();
             const { coffeeBeansState, fetchCoffeeBeans } = useCoffeeBeansState();
             const { coffeeBeans } = toRefs(coffeeBeansState);
             const { messageState, setMessage } = useMessageState();
@@ -76,7 +73,6 @@
             const editCoffeeBean = (coffeeBean) => {
                     console.log('編輯咖啡豆', coffeeBean);
                     editableCoffeeBean.value = { ...coffeeBean };
-                    // console.log('編輯咖啡豆', editableCoffeeBean);
                     isEditDialogVisible.value = true;
             };
 
@@ -84,12 +80,10 @@
                 try {
                     await axios.delete(`/api/coffeebeans/${id}`)
                     setMessage('咖啡豆資料已刪除')
-                    // alert('');
                     await fetchCoffeeBeans();
                 } catch (error) {
                     console.error("刪除咖啡豆失敗：", error);
                     setMessage('刪除咖啡豆失敗')
-                    // alert('');
                 }
             };
 
@@ -158,26 +152,19 @@
     .coffee-beans-list {
         flex: 1;
         display: flex;
-        /* flex-wrap: wrap; */
         flex-direction: column;
         margin: 20px;
         padding: 10px;
-        // overflow:hidden;
-        // overflow-y: scroll;
         background: rgba(255, 255, 255, 0.1);
-        // backdrop-filter: blur(5px);
         border-radius: 15px;
         box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1), inset 10px 10px 15px rgba(255, 255, 255, 0.05);
     }
     .coffee-beans-list ul{
-        /* margin: 0; */
         padding: 0;
         list-style-type: none;
         display: flex;
         flex-direction: column;
         height: 100%;
-        // overflow: hidden;
-        // overflow-y: scroll;
 
         li {
             transition: 0.3s;

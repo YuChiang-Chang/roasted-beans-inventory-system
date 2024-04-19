@@ -11,8 +11,6 @@ class CustomPermission(models.Model):
     description = models.TextField(blank=True)
 
     def __str__(self):
-        # 返回`auth.add_user (Can add user)`
-        # return f"{self.content_type.app_label}.{self.codename} ({self.name})"
         return self.name
     
 class Role(models.Model):
@@ -22,17 +20,6 @@ class Role(models.Model):
     def __str__(self):
         return self.name
 
-
-# class SimplePermission(models.Model):
-#     name = models.CharField(max_length=100)
-
-#     def __str__(self):
-#         return self.name
-    
-# class User(models.Model):
-# class CustomUserModel(models.Model):
-#     email = models.EmailField(unique=True)
-#     permissions = models.ManyToManyField(CustomPermission, blank=True, related_name='users')
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -92,14 +79,8 @@ class CustomUser(AbstractBaseUser):
         "用戶是否有特定權限？"
         if self.is_superuser:
             return True
-        # 檢查用戶是擁有指定的權限
-        # return self.permissions.filter(codename=perm).exists() or \
-        #     any(Role.permissions.filter(codename=perm).exists() for role in self.roles.all())
     
     def has_module_perms(self, app_label):
         "用戶是否有權查看 app_label 應用的權限？"
         if self.is_superuser:
             return True
-        # 檢查用戶是否有權查看指定app_label下的任何權限
-        # return self.permissions.filter(content_type__app_label=app_label).exists() or \
-        #     any(Role.permissions.filter(content_type__app_label=app_label).exists() for role in self.roles.all())

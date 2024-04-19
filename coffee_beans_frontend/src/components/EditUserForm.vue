@@ -10,10 +10,6 @@
                 <label for="password">密碼（留空則不修改）</label>
                 <input id="password" v-model="editableUser.password" type="password">
             </div>
-            <!-- <div v-for="permission in permissions" :key="permission.id">
-                <input type="checkbox" :value="permission.id" v-model="selectedPermissions">
-                <label>{{ permission.name }}</label>
-            </div> -->
             <div>
                 <label>選擇角色</label>
                 <select v-model="editableUser.selectedRole">
@@ -43,13 +39,9 @@
     export default {
         props: ['user'],
         setup(props) {
-            // const originalUser = reactive({});
             const store = useStore();
-            // const permissions = computed(() => store.state.userManagement.permissions);
             const permissions = ref([]);
             const roles = ref([]);
-            // const errorMessage = ref('');
-            // const selectedPermissions = ref([]);
             const editableUser = ref({
                 email: '',
                 password: '',
@@ -59,15 +51,10 @@
 
             const initForm = () => {
                 editableUser.value.email = props.user.email || '';
-                // editableUser.value.roles = props.user.roles.map(role => role.id) || [];
                 editableUser.value.selectedPermissions = props.user.permissions || [];
             }
             
             watch(() => props.user, (newVal) => {
-                // editableUser.value.email = newVal.email || '';
-                // editableUser.value.password = ''; // 密碼欄位保留空，不預填
-                // editableUser.value.selectedRole = newVal.roles?.[0]?.id || '';
-                // editableUser.value.selectedPermissions = newVal.permissions?.map(p => p.id) || [];
                 if (newVal) {
                     initForm();
                 }
@@ -83,20 +70,17 @@
                     permissions.value = permissionsResponse.data;
                 } catch (error) {
                     console.error('獲取角色和權限列表失敗', error);
-                    // errorMessage.value = '獲取角色和權限列表失敗';
                 }
             };
 
             onMounted(async () => {
                 await fetchRolesAndPermissions();
-                // initUserForm();
             })
 
             const submitUpdate = () => {
 
                 const userData = {
                     email: editableUser.value.email,
-                    // password: editableUser.value.password,
                 }
                 
                 if (editableUser.value.password) {
@@ -112,10 +96,6 @@
                     userId: props.user.id,
                     userData,
                 });
-                // console.log('Update user:', props.user.permissions);
-                // console.log(permissions);
-                // console.log(userData)
-                
             }
 
             const isSuperuser = computed(() => {
@@ -124,12 +104,10 @@
 
             return {
                 editableUser,
-                // selectedPermissions,
                 permissions,
                 roles,
                 submitUpdate,
                 isSuperuser,
-                // errorMessage,
             }
         }
     }

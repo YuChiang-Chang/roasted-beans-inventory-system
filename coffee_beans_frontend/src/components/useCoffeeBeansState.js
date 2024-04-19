@@ -26,5 +26,3 @@ export function useCoffeeBeansState () {
         fetchCoffeeBeans,
     }
 }
-
-// export default state;

@@ -33,7 +33,6 @@
 <script>
     import { ref, onMounted } from 'vue';
     import axios from 'axios';
-    // import { useStore } from 'vuex';
 
     export default {
         emits: ['user-created'],
@@ -46,7 +45,6 @@
             const roles = ref([]);
             const selectedPermissions = ref([]);
             const selectedRoles = ref([]);
-            // const store = useStore();
             const errorMessage = ref('');
 
             const fetchRolesAndPermissions = async () => {
@@ -73,7 +71,6 @@
                         permissions: selectedPermissions.value,
                     });
                     emit('user-created');
-                    // store.dispatch('userManagement/createUser', newUser.value);
                     // 重置表單
                     newUser.value.email = '';
                     newUser.value.password = '';

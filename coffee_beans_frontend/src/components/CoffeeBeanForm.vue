@@ -14,7 +14,6 @@
                 <label for="roast_level">{{ formLabels.roastLevel }}</label>
                 <select id="roast_level" v-model="coffeeBean.roast_level" required>
                     <option v-for="option in roastLevelOptions" :key="option.value" :value="option.text">{{ option.text }}</option>
-                    <!-- <option value="中烘焙">中烘焙</option> -->
                 </select>
             </div>
             <div>
@@ -42,8 +41,6 @@
     import axios from 'axios';
     import zh from '@/i18n/locales/zh';
     import { useCoffeeBeansState } from './useCoffeeBeansState';
-    // import state from './state';
-    // import { useFetchCoffeeBeans } from './useFetchCoffeeBeans';
 
     export default {
         setup() {
@@ -62,8 +59,6 @@
             const formLabels = zh.formLabels
 
             const roastLevelOptions = computed(() => Object.entries(formLabels.roastLevelOptions).map(([value, text]) => ({ value, text })));
-            
-            // const { fetchCoffeeBeans } = useFetchCoffeeBeans();
 
             const handleSubmit = async () => {
                 if (!validateForm()) {
@@ -79,30 +74,6 @@
                     console.error("新增咖啡豆失敗:", error);
                     successMessage.value = '新增咖啡豆失敗';
                 }
-
-                // try {
-                //     const response = await fetch('http://localhost:8000/api/coffeebeans/', {
-                //     method: 'POST',
-                //     headers: {
-                //         'Content-Type': 'application/json',
-                //     },
-                //     body: JSON.stringify(coffeeBean),
-                //     });
-
-                //     if (!response.ok) {
-                //     const errorData = await response.json(); // 假设后端返回了 JSON 格式的错误信息
-                //     console.error("新增咖啡豆失败:", errorData);
-                //     successMessage.value = errorData.detail || '新增咖啡豆失败'; // 显示具体错误信息
-                //     return;
-                //     }
-
-                //     successMessage.value = '咖啡豆资料新增成功';
-                //     resetForm();   
-                //     await useCoffeeBeansState().fetchCoffeeBeans();
-                // } catch (error) {
-                //     console.error("请求发送失败:", error);
-                //     successMessage.value = '请求发送失败';
-                // }
             };
 
             const validateForm = () => {
@@ -158,14 +129,9 @@
         flex: 1;
         padding: 20px;
         margin: 20px;
-        /* display: flex; */
-        /* margin-bottom: 100px; */
-        /* box-sizing: border-box; */
         background: rgba(255, 255, 255, 0.1);
-        /* backdrop-filter: blur(5px); */
         border-radius: 15px;
         box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1), inset 10px 10px 15px rgba(255, 255, 255, 0.05);
-        /* border: 1px solid rgba(255, 255, 255, 0.3); */
 
     }
     .success-message {

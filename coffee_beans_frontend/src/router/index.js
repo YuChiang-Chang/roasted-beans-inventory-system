@@ -43,10 +43,6 @@ function isLoggedIn() {
     return store.state.isLoggedIn;
 }
 
-// function isAdmin() {
-//     return store.state.isAdmin;
-// }
-
 router.beforeEach((to, from, next) => {
 
     if (to.name === 'Login' && isLoggedIn()) {
@@ -54,9 +50,6 @@ router.beforeEach((to, from, next) => {
     } else if (to.matched.some(record => record.meta.requiresAuth) && !isLoggedIn()) {
         // 如果目標路由需要認證但用戶未登入，重定向到登入頁面
         next({ name: 'Login' });
-    // } else if (to.matched.some(record => record.meta.requiresAdmin) && !isAdmin()) {
-        // 如果目標路由需要管理員權限但用戶不是管理員，重定向到首頁或其他頁面
-        // next({ name: 'Home' });
     } else {
         // 確保一定要調用 next()
         next();

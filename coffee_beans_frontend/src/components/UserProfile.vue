@@ -68,15 +68,12 @@
 
             const updateField = async (field) => {
                 try {
-                    // const updateValue = user.value[field]
                     await store.dispatch('updateUserInfo', { [field]: editableFields[field] });
                     // 更新成功後切換編輯狀態
                     isEditing[field] = false;
                     if (field === "password") {
                         editableFields.password = "";
                     }
-                    // 更新用戶資料
-                    // user.value[field] = editableFields[field];
                 } catch (error) {
                     console.error('更新失敗', error);
                 }

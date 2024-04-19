@@ -16,8 +16,6 @@
                         <label for="roast_level">{{ formLabels.roastLevel }}</label>
                         <select id="roast_level" v-model="editableBean.roast_level">
                             <option v-for="option in roastLevelOptions" :key="option.value" :value="option.text">{{ option.text }}</option>
-                            <!-- <option value="中烘焙">中烘焙</option>
-                            <option value="深烘焙">深烘焙</option> -->
                         </select>
                     </div>
                     <div>
@@ -102,20 +100,14 @@
 }
 
 .dialog {
-    /*  background: white; */
     background: rgba(255, 255, 255, 0.6);
-    // background-image: rgba(183, 148, 113, 1);
-    // background: rgba(183, 148, 113, 1);
     backdrop-filter: blur(15px);
     border-radius: 20px;
     padding: 20px;
-    // gap: 12px;
-//   z-index: 1;
 
   &::before {
     content: "";
     background: rgba(255, 255, 255, 0.15);
-    // background-color: rgba(183, 148, 113, 0.1);
     border-radius: 20px;
     position: absolute;
     inset: 0;
@@ -124,21 +116,11 @@
     bottom: -1rem;
     left: -1rem;
     z-index: -10;
-    // backdrop-filter: blur(5px);
-    // height: 50%;
-    // width: 60%;
-    // transition: calc(-50px);
-    // transform: translateX(-50%);
-    // transform: translateY(-50%);
-    
-    // padding: 50px;
-    //   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1), transparent);
     
     }
     &::after {
         content: "";
         background: rgba(255, 255, 255, 0.15);
-        // backdrop-filter: blur(5px);
         border-radius: 20px;
         position: absolute;
         inset: 0;
@@ -147,25 +129,8 @@
         bottom: -1rem;
         left: -1rem;
         z-index: -1;
-        //   background-image: linear-gradient(to left, rgba(255, 255, 255, 0.1), transparent);
     }
 }
-// .dialog::before,
-// .dialog::after {
-//   content: "";
-//   position: absolute;
-//   inset: 0; /* Stretch to cover the entire dialog area */
-//   z-index: -1; /* Place behind the dialog content */
-//   border-radius: inherit; /* Inherit border-radius from the dialog */
-// }
-
-// .dialog::before {
-//   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1), transparent);
-// }
-
-// .dialog::after {
-//   background-image: linear-gradient(to left, rgba(255, 255, 255, 0.1), transparent);
-// }
 
 .form-group {
   margin-bottom: 10px;

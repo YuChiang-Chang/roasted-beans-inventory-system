@@ -18,7 +18,6 @@
 
 <script>
     import { ref } from 'vue';
-    // import axios from 'axios';
     import { useRouter } from 'vue-router'
     import { useStore } from 'vuex';
 
@@ -32,17 +31,9 @@
             
             const login = async () => {
                 try {
-                    // const response = await axios.post('/api/user_management/login/', {
-                    //     email: email.value,
-                    //     password: password.value,
-                    // });
-                    // console.log('登入成功', response);
-                    // const token = response.data.token;
-                    // localStorage.setItem('user-token', token);
                     await store.dispatch('login', {
                         email: email.value,
                         password: password.value,
-                        // token
                     });
                     router.push({ name: 'Home'});
                 } catch (error) {
